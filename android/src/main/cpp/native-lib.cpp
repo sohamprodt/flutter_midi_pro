@@ -23,7 +23,7 @@ Java_com_melihhakanpektas_flutter_1midi_1pro_FlutterMidiProPlugin_loadSoundfont(
 
     synths[nextSfId] = new_fluid_synth(local_settings);
     drivers[nextSfId] = new_fluid_audio_driver(local_settings, synths[nextSfId]);
-    int sfId = fluid_synth_sfload(synths[nextSfId], nativePath, 0);
+    int sfId = fluid_synth_sfload(synths[nextSfId], nativePath, 1);
     for (int i = 0; i < 16; i++) {
         fluid_synth_program_select(synths[nextSfId], i, sfId, bank, program);
     }
