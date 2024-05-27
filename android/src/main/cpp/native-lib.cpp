@@ -9,11 +9,20 @@ std::map<int, fluid_audio_driver_t*> drivers = {};
 std::map<int, int> soundfonts = {};
 int nextSfId = 1;
 
+// Set default volume
+void set_default_volume(fluid_settings_t* settings, double volume) {
+    fluid_settings_setnum(settings, "synth.gain", volume);
+}
+
 extern "C" JNIEXPORT int JNICALL
 Java_com_melihhakanpektas_flutter_1midi_1pro_FlutterMidiProPlugin_loadSoundfont(JNIEnv* env, jclass clazz, jstring path, jint bank, jint program) {
     const char *nativePath = env->GetStringUTFChars(path, nullptr);
-    synths[nextSfId] = new_fluid_synth(settings);
-    drivers[nextSfId] = new_fluid_audio_driver(settings, synths[nextSfId]);
+    // Create a new settings object for each synth to ensure individual control
+    fluid_settings_t* local_settings = new_fluid_settings();
+    set_default_volume(local_settings, 5.0); // Set the desired default volume
+
+    synths[nextSfId] = new_fluid_synth(local_settings);
+    drivers[nextSfId] = new_fluid_audio_driver(local_settings, synths[nextSfId]);
     int sfId = fluid_synth_sfload(synths[nextSfId], nativePath, 0);
     for (int i = 0; i < 16; i++) {
         fluid_synth_program_select(synths[nextSfId], i, sfId, bank, program);
