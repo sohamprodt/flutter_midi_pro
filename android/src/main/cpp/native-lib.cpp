@@ -19,7 +19,7 @@ Java_com_melihhakanpektas_flutter_1midi_1pro_FlutterMidiProPlugin_loadSoundfont(
     const char *nativePath = env->GetStringUTFChars(path, nullptr);
     // Create a new settings object for each synth to ensure individual control
     fluid_settings_t* local_settings = new_fluid_settings();
-    set_default_volume(local_settings, 1.0); // Set the desired default volume
+    set_default_volume(local_settings, 0.5); // Set the desired default volume
 
     synths[nextSfId] = new_fluid_synth(local_settings);
     drivers[nextSfId] = new_fluid_audio_driver(local_settings, synths[nextSfId]);
