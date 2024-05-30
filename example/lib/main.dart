@@ -16,7 +16,8 @@ class MyApp extends StatefulWidget {
 
 class _MyAppState extends State<MyApp> {
   final MidiPro midiPro = MidiPro();
-  final ValueNotifier<Map<int, String>> loadedSoundfonts = ValueNotifier<Map<int, String>>({});
+  final ValueNotifier<Map<int, String>> loadedSoundfonts =
+      ValueNotifier<Map<int, String>>({});
   final ValueNotifier<int?> selectedSfId = ValueNotifier<int?>(null);
   final instrumentIndex = ValueNotifier<int>(0);
   final bankIndex = ValueNotifier<int>(0);
@@ -29,9 +30,12 @@ class _MyAppState extends State<MyApp> {
   Future<int> loadSoundfont(String path, int bank, int program) async {
     if (loadedSoundfonts.value.containsValue(path)) {
       print('Soundfont file: $path already loaded. Returning ID.');
-      return loadedSoundfonts.value.entries.firstWhere((element) => element.value == path).key;
+      return loadedSoundfonts.value.entries
+          .firstWhere((element) => element.value == path)
+          .key;
     }
-    final int sfId = await midiPro.loadSoundfont(path: path, bank: bank, program: program);
+    final int sfId =
+        await midiPro.loadSoundfont(path: path, bank: bank, program: program);
     loadedSoundfonts.value = {sfId: path, ...loadedSoundfonts.value};
     print('Loaded soundfont file: $path with ID: $sfId');
     return sfId;
@@ -51,7 +55,8 @@ class _MyAppState extends State<MyApp> {
       selectedSfId.value = sfId;
     }
     print('Selected soundfont file: $sfIdValue');
-    await midiPro.selectInstrument(sfId: sfIdValue, channel: channel, bank: bank, program: program);
+    await midiPro.selectInstrument(
+        sfId: sfIdValue, channel: channel, bank: bank, program: program);
   }
 
   /// Plays a note on the specified channel.
@@ -65,7 +70,8 @@ class _MyAppState extends State<MyApp> {
     if (!loadedSoundfonts.value.containsKey(sfId)) {
       sfIdValue = loadedSoundfonts.value.keys.first;
     }
-    await midiPro.playNote(channel: channel, key: key, velocity: velocity, sfId: sfIdValue);
+    await midiPro.playNote(
+        channel: channel, key: key, velocity: velocity, sfId: sfIdValue);
   }
 
   /// Stops a note on the specified channel.
@@ -122,8 +128,8 @@ class _MyAppState extends State<MyApp> {
                         children: List.generate(
                           sf2Paths.length,
                           (index) => ElevatedButton(
-                            onPressed: () => loadSoundfont(
-                                sf2Paths[index], bankIndex.value, instrumentIndex.value),
+                            onPressed: () => loadSoundfont(sf2Paths[index],
+                                bankIndex.value, instrumentIndex.value),
                             child: Text('Load Soundfont ${sf2Paths[index]}'),
                           ),
                         )),
@@ -148,18 +154,23 @@ class _MyAppState extends State<MyApp> {
                                   children: [
                                     ValueListenableBuilder(
                                         valueListenable: selectedSfId,
-                                        builder: (context, selectedSfIdValue, child) {
+                                        builder: (context, selectedSfIdValue,
+                                            child) {
                                           return ElevatedButton(
-                                            onPressed: selectedSfIdValue == entry.key
-                                                ? null
-                                                : () => selectedSfId.value = entry.key,
-                                            child: Text(selectedSfIdValue == entry.key
-                                                ? 'Selected'
-                                                : 'Select'),
+                                            onPressed:
+                                                selectedSfIdValue == entry.key
+                                                    ? null
+                                                    : () => selectedSfId.value =
+                                                        entry.key,
+                                            child: Text(
+                                                selectedSfIdValue == entry.key
+                                                    ? 'Selected'
+                                                    : 'Select'),
                                           );
                                         }),
                                     ElevatedButton(
-                                      onPressed: () => unloadSoundfont(entry.key),
+                                      onPressed: () =>
+                                          unloadSoundfont(entry.key),
                                       child: const Text('Unload'),
                                     ),
                                   ],
@@ -187,7 +198,8 @@ class _MyAppState extends State<MyApp> {
                                                 value: i,
                                                 child: Text(
                                                   'Bank $i',
-                                                  style: const TextStyle(fontSize: 13),
+                                                  style: const TextStyle(
+                                                      fontSize: 13),
                                                 ),
                                               )
                                           ],
@@ -208,7 +220,8 @@ class _MyAppState extends State<MyApp> {
                                                 value: i,
                                                 child: Text(
                                                   'Instrument $i',
-                                                  style: const TextStyle(fontSize: 13),
+                                                  style: const TextStyle(
+                                                      fontSize: 13),
                                                 ),
                                               )
                                           ],
@@ -220,7 +233,8 @@ class _MyAppState extends State<MyApp> {
                                     }),
                                 ValueListenableBuilder(
                                     valueListenable: channelIndex,
-                                    builder: (context, channelIndexValue, child) {
+                                    builder:
+                                        (context, channelIndexValue, child) {
                                       return DropdownButton<int>(
                                           value: channelIndexValue,
                                           items: [
@@ -229,7 +243,8 @@ class _MyAppState extends State<MyApp> {
                                                 value: i,
                                                 child: Text(
                                                   'Channel $i',
-                                                  style: const TextStyle(fontSize: 13),
+                                                  style: const TextStyle(
+                                                      fontSize: 13),
                                                 ),
                                               )
                                           ],
@@ -246,19 +261,27 @@ class _MyAppState extends State<MyApp> {
                                 builder: (context, bankIndexValue, child) {
                                   return ValueListenableBuilder(
                                       valueListenable: channelIndex,
-                                      builder: (context, channelIndexValue, child) {
+                                      builder:
+                                          (context, channelIndexValue, child) {
                                         return ValueListenableBuilder(
                                             valueListenable: instrumentIndex,
-                                            builder: (context, instrumentIndexValue, child) {
+                                            builder: (context,
+                                                instrumentIndexValue, child) {
                                               return ElevatedButton(
-                                                  onPressed: selectedSfIdValue != null
-                                                      ? () => selectInstrument(
-                                                            sfId: selectedSfIdValue,
-                                                            program: instrumentIndexValue,
-                                                            bank: bankIndexValue,
-                                                            channel: channelIndexValue,
-                                                          )
-                                                      : null,
+                                                  onPressed:
+                                                      selectedSfIdValue != null
+                                                          ? () =>
+                                                              selectInstrument(
+                                                                sfId:
+                                                                    selectedSfIdValue,
+                                                                program:
+                                                                    instrumentIndexValue,
+                                                                bank:
+                                                                    bankIndexValue,
+                                                                channel:
+                                                                    channelIndexValue,
+                                                              )
+                                                          : null,
                                                   child: Text(
                                                       'Load Instrument $instrumentIndexValue on Bank $bankIndexValue to Channel $channelIndexValue'));
                                             });
@@ -279,7 +302,8 @@ class _MyAppState extends State<MyApp> {
                                             min: 0,
                                             max: 127,
                                             onChanged: selectedSfIdValue != null
-                                                ? (value) => volume.value = value.toInt()
+                                                ? (value) =>
+                                                    volume.value = value.toInt()
                                                 : null,
                                           )),
                                           const SizedBox(
@@ -294,7 +318,8 @@ class _MyAppState extends State<MyApp> {
                               child: ElevatedButton(
                                 onPressed: !(selectedSfIdValue != null)
                                     ? null
-                                    : () => unloadSoundfont(loadedSoundfonts.value.keys.first),
+                                    : () => unloadSoundfont(
+                                        loadedSoundfonts.value.keys.first),
                                 child: const Text('Unload Soundfont file'),
                               ),
                             ),
@@ -317,7 +342,8 @@ class _MyAppState extends State<MyApp> {
                                     if (note == null) return;
                                     if (pointerAndNote[tapId] == note) return;
                                     stopNote(
-                                        key: pointerAndNote[tapId]!.midiNoteNumber,
+                                        key: pointerAndNote[tapId]!
+                                            .midiNoteNumber,
                                         channel: channelIndex.value,
                                         sfId: selectedSfIdValue!);
                                     pointerAndNote[tapId] = note;
@@ -331,7 +357,8 @@ class _MyAppState extends State<MyApp> {
                                   },
                                   onTapUp: (int tapId) {
                                     stopNote(
-                                        key: pointerAndNote[tapId]!.midiNoteNumber,
+                                        key: pointerAndNote[tapId]!
+                                            .midiNoteNumber,
                                         channel: channelIndex.value,
                                         sfId: selectedSfIdValue!);
                                     pointerAndNote.remove(tapId);

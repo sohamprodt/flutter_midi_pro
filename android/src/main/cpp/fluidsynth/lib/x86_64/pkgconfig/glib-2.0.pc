@@ -1,16 +1,17 @@
 prefix=/home/vsts/work/1/s/android-build-root/opt/android
-libdir=${prefix}/lib
+exec_prefix=${prefix}
+libdir=/home/vsts/work/1/s/android-build-root/opt/android/lib
 includedir=${prefix}/include
 
-bindir=${prefix}/bin
+bindir=${exec_prefix}/bin
 glib_genmarshal=${bindir}/glib-genmarshal
 gobject_query=${bindir}/gobject-query
 glib_mkenums=${bindir}/glib-mkenums
 
 Name: GLib
 Description: C Utility Library
-Version: 2.72.4
-Requires.private: libpcre >=  8.31
-Libs: -L${libdir} -lglib-2.0 -lintl -liconv
-Libs.private: -pthread -lm
-Cflags: -I${includedir}/glib-2.0 -I${libdir}/glib-2.0/include
+Version: 2.58.3
+Requires.private: 
+Libs: -L${libdir} -lglib-2.0 -lintl -liconv 
+Libs.private: -pthread   -lintl -liconv    
+Cflags: -I${includedir}/glib-2.0 -I${libdir}/glib-2.0/include 

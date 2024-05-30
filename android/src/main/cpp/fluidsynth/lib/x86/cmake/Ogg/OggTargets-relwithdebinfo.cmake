@@ -12,8 +12,8 @@ set_target_properties(Ogg::ogg PROPERTIES
   IMPORTED_SONAME_RELWITHDEBINFO "libogg.so"
   )
 
-list(APPEND _cmake_import_check_targets Ogg::ogg )
-list(APPEND _cmake_import_check_files_for_Ogg::ogg "${_IMPORT_PREFIX}/lib/libogg.so" )
+list(APPEND _IMPORT_CHECK_TARGETS Ogg::ogg )
+list(APPEND _IMPORT_CHECK_FILES_FOR_Ogg::ogg "${_IMPORT_PREFIX}/lib/libogg.so" )
 
 # Commands beyond this point should not need to know the version.
 set(CMAKE_IMPORT_FILE_VERSION)

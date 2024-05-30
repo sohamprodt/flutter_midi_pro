@@ -12,8 +12,8 @@ set_target_properties(Vorbis::vorbis PROPERTIES
   IMPORTED_SONAME_RELWITHDEBINFO "libvorbis.so"
   )
 
-list(APPEND _cmake_import_check_targets Vorbis::vorbis )
-list(APPEND _cmake_import_check_files_for_Vorbis::vorbis "${_IMPORT_PREFIX}/lib/libvorbis.so" )
+list(APPEND _IMPORT_CHECK_TARGETS Vorbis::vorbis )
+list(APPEND _IMPORT_CHECK_FILES_FOR_Vorbis::vorbis "${_IMPORT_PREFIX}/lib/libvorbis.so" )
 
 # Import target "Vorbis::vorbisenc" for configuration "RelWithDebInfo"
 set_property(TARGET Vorbis::vorbisenc APPEND PROPERTY IMPORTED_CONFIGURATIONS RELWITHDEBINFO)
@@ -22,8 +22,8 @@ set_target_properties(Vorbis::vorbisenc PROPERTIES
   IMPORTED_SONAME_RELWITHDEBINFO "libvorbisenc.so"
   )
 
-list(APPEND _cmake_import_check_targets Vorbis::vorbisenc )
-list(APPEND _cmake_import_check_files_for_Vorbis::vorbisenc "${_IMPORT_PREFIX}/lib/libvorbisenc.so" )
+list(APPEND _IMPORT_CHECK_TARGETS Vorbis::vorbisenc )
+list(APPEND _IMPORT_CHECK_FILES_FOR_Vorbis::vorbisenc "${_IMPORT_PREFIX}/lib/libvorbisenc.so" )
 
 # Import target "Vorbis::vorbisfile" for configuration "RelWithDebInfo"
 set_property(TARGET Vorbis::vorbisfile APPEND PROPERTY IMPORTED_CONFIGURATIONS RELWITHDEBINFO)
@@ -32,8 +32,8 @@ set_target_properties(Vorbis::vorbisfile PROPERTIES
   IMPORTED_SONAME_RELWITHDEBINFO "libvorbisfile.so"
   )
 
-list(APPEND _cmake_import_check_targets Vorbis::vorbisfile )
-list(APPEND _cmake_import_check_files_for_Vorbis::vorbisfile "${_IMPORT_PREFIX}/lib/libvorbisfile.so" )
+list(APPEND _IMPORT_CHECK_TARGETS Vorbis::vorbisfile )
+list(APPEND _IMPORT_CHECK_FILES_FOR_Vorbis::vorbisfile "${_IMPORT_PREFIX}/lib/libvorbisfile.so" )
 
 # Commands beyond this point should not need to know the version.
 set(CMAKE_IMPORT_FILE_VERSION)

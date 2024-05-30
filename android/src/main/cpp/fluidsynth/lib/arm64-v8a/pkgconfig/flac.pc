@@ -5,8 +5,8 @@ includedir=/home/vsts/work/1/s/android-build-root/opt/android/include
 
 Name: FLAC
 Description: Free Lossless Audio Codec Library
-Version: 1.4.2
-Requires.private: ogg
+Version: 
+Requires.private: 
 Libs: -L${libdir} -lFLAC
 Libs.private: -lm
 Cflags: -I${includedir}

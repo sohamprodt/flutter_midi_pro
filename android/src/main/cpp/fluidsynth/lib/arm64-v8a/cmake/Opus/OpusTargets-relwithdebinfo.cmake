@@ -12,8 +12,8 @@ set_target_properties(Opus::opus PROPERTIES
   IMPORTED_SONAME_RELWITHDEBINFO "libopus.so"
   )
 
-list(APPEND _cmake_import_check_targets Opus::opus )
-list(APPEND _cmake_import_check_files_for_Opus::opus "${_IMPORT_PREFIX}/lib/libopus.so" )
+list(APPEND _IMPORT_CHECK_TARGETS Opus::opus )
+list(APPEND _IMPORT_CHECK_FILES_FOR_Opus::opus "${_IMPORT_PREFIX}/lib/libopus.so" )
 
 # Commands beyond this point should not need to know the version.
 set(CMAKE_IMPORT_FILE_VERSION)
